@@ -1,0 +1,125 @@
+# BHARAT NIRIKSHAK — Hackathon Submission Metadata
+# Bob AI Hackathon Submission Template
+# Replace all [placeholder] values before submitting
+
+submission:
+  project_title: "BHARAT NIRIKSHAK — AI-Powered National Forensic Intelligence Platform"
+  tagline: "Turning raw forensic data into actionable intelligence — faster victim identification, smarter evidence prioritization, proactive crime prevention."
+  track: "AI"
+  hackathon: "Bob AI Hackathon"
+
+team:
+  name: "Bharat Nirikshak"
+  lead:
+    name: "[Team Lead Name]"
+    email: "[email@ibm.com]"
+  members:
+    - name: "[Member 1 Name]"
+      role: "[Role — e.g., Backend Engineer]"
+    - name: "[Member 2 Name]"
+      role: "[Role — e.g., Frontend Engineer]"
+    - name: "[Member 3 Name]"
+      role: "[Role — e.g., Data Scientist]"
+
+repository:
+  url: "https://github.com/[your-org]/bharat-nirikshak"
+  branch: "main"
+  structure:
+    - path: "src/"
+      description: "Unified Streamlit application entry point"
+    - path: "core/"
+      description: "Shared backend AI engines — DVI, evidence, crime analysis, FIR NLP, Bob agent"
+    - path: "pages/"
+      description: "Streamlit page modules for each feature"
+    - path: "part1-dvi-intelligence/"
+      description: "Standalone Node.js DVI Intelligence server (Port 3000)"
+    - path: "part2-crime-scene-evidence/"
+      description: "Standalone Node.js Evidence Triage server (Port 3001)"
+    - path: "part 3/"
+      description: "Standalone Streamlit Crime Hotspot Dashboard"
+    - path: "docs/"
+      description: "Written documentation — problem, solution, architecture, setup"
+    - path: "demo/"
+      description: "Demo video link, live URL, screenshots"
+    - path: "presentation/"
+      description: "Executive slide deck"
+
+problem_statements_addressed:
+  - id: "Problem #01"
+    title: "Predictive Crime Hotspot Mapping"
+    module: "Part 3 — Crime Hotspot Dashboard"
+  - id: "Problem #02"
+    title: "Disaster Victim Identification (DVI)"
+    module: "Part 1 — DVI Forensic Intelligence"
+  - id: "Problem #03"
+    title: "Crime Scene Evidence Prioritization"
+    module: "Part 2 — AI Evidence Triage"
+
+tech_stack:
+  languages:
+    - Python
+    - JavaScript (Node.js)
+  frameworks:
+    - Streamlit
+    - Express.js
+  ibm_technologies:
+    - IBM Bob (watsonx AI Forensic Copilot)
+    - IBM Watsonx.ai
+    - IBM Cloud
+  libraries:
+    - PyDeck / deck.gl
+    - Plotly
+    - Pandas
+    - NetworkX
+    - RapidFuzz
+    - Pydantic
+  databases:
+    - JSON flat-file stores (mock)
+
+demo:
+  video: "demo/demo-video-link.txt"
+  live_url: "demo/live-demo-url.txt"
+  screenshots: "demo/screenshots/"
+  presentation: "presentation/slides.pptx"
+
+how_to_run:
+  unified_platform:
+    command: "streamlit run app.py"
+    url: "http://localhost:8501"
+    prerequisites:
+      - "pip install -r requirements.txt"
+  part1_dvi:
+    command: "node server.js"
+    working_dir: "part1-dvi-intelligence"
+    url: "http://localhost:3000"
+    prerequisites:
+      - "npm install"
+  part2_evidence:
+    command: "node server.js"
+    working_dir: "part2-crime-scene-evidence"
+    url: "http://localhost:3001"
+    prerequisites:
+      - "npm install"
+  part3_hotspot:
+    command: "streamlit run streamlit_app.py"
+    working_dir: "part 3"
+    url: "http://localhost:8501"
+    prerequisites:
+      - "pip install -r requirements.txt"
+
+known_limitations:
+  - "Crime hotspot data is synthetically generated — demonstrates method, not real statistics"
+  - "IBM Bob uses mock responses in demo mode; live watsonx.ai credentials required for production"
+  - "DVI and Evidence modules use in-memory JSON stores — not a production database"
+  - "Deepfake Media Lab is scaffolded; live inference requires additional GPU setup"
+  - "Tested primarily on Chrome and modern Chromium browsers"
+
+ibm_bob_usage:
+  agent_embedded: true
+  pages:
+    - "All Streamlit pages via sidebar widget (render_bob_agent)"
+  capabilities:
+    - "Natural language forensic Q&A"
+    - "Evidence interpretation guidance"
+    - "DVI match rationale explanation"
+    - "Crime hotspot analysis interpretation"
