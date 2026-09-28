@@ -10,8 +10,8 @@
 |---|---|
 | **Team Name** | Bharat Nirikshak |
 | **Track** | AI |
-| **Team Lead** | [Name] — [email@ibm.com] |
-| **Members** | [Name 1], [Name 2], [Name 3] |
+| **Team Lead** | [DAKSH CHAUHAN] — [daksh4504@gmail.com] |
+| **Members** | [daksh], [kavish], |
 
 ---
 
