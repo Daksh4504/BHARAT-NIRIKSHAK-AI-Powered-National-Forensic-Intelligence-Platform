@@ -1,0 +1,38 @@
+[
+  {
+    "id": "CASE-2026-089",
+    "caseTitle": "High-Rise Penthouse Homicide & Forced Entry",
+    "crimeType": "Homicide / Burglary (BNS 103 / IPC 302)",
+    "description": "Victim found deceased in study room with sharp force trauma and blunt head injuries. Safe forced open, secondary bedroom ransacked. Suspect fled via balcony fire escape.",
+    "location": "Apartment 14B, Skyview Towers, Sector 18",
+    "dateOccurred": "2026-09-27T23:15:00.000Z",
+    "investigatingOfficer": "Inspector R. K. Malhotra (Crime Branch)",
+    "leadForensicInvestigator": "Dr. Ananya Sen (Senior CSI Officer)",
+    "incidentStatus": "Active Crime Scene Triage",
+    "createdAt": "2026-09-28T01:30:00.000Z"
+  },
+  {
+    "id": "CASE-2026-112",
+    "caseTitle": "Commercial Bank Vault Blast & Armed Robbery",
+    "crimeType": "Armed Robbery / Explosive Breach (BNS 309 / IPC 392)",
+    "description": "Perpetrators breached rear vault door using improvised explosive booster and electronic bypass device. Security guard incapacitated. Currency cash boxes stolen.",
+    "location": "National Apex Bank, Industrial Zone Branch, Sector 4",
+    "dateOccurred": "2026-09-26T02:45:00.000Z",
+    "investigatingOfficer": "Assistant Commissioner V. Deshmukh",
+    "leadForensicInvestigator": "Dr. T. Roy (Ballistics & Explosives Specialist)",
+    "incidentStatus": "Lab Analysis Phase",
+    "createdAt": "2026-09-26T04:15:00.000Z"
+  },
+  {
+    "id": "CASE-2026-045",
+    "caseTitle": "Corporate Executive Kidnapping & Extortion",
+    "crimeType": "Kidnapping / Cyber Extortion (BNS 140 / IPC 364A)",
+    "description": "Target abducted from underground office parking. Encrypted audio ransom note delivered via disposable burner phone and encrypted flash drive left in victim's vehicle.",
+    "location": "Infotech Cyber Park, Basement Level B3",
+    "dateOccurred": "2026-09-27T19:00:00.000Z",
+    "investigatingOfficer": "Inspector Sneha Patil (Special Cell)",
+    "leadForensicInvestigator": "Dr. M. Chawla (Cyber Forensics Lead)",
+    "incidentStatus": "Urgent Triage Phase",
+    "createdAt": "2026-09-27T20:30:00.000Z"
+  }
+]

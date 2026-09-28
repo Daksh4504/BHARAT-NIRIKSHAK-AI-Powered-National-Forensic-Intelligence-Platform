@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Evidence Prioritization | AI Crime Scene Forensic Triage</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Top Tactical Navigation Bar -->
+  <header class="top-nav">
+    <div class="nav-left">
+      <div class="badge-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/>
+          <path d="m21 21-4.3-4.3"/>
+          <path d="M11 8v6"/>
+          <path d="M8 11h6"/>
+        </svg>
+      </div>
+      <div>
+        <div class="brand-title">EVIDENCE PRIORITIZATION</div>
+        <div class="brand-sub">AI Crime Scene Triage & FSL Dispatch Queue • ISO/IEC 17025 Standard</div>
+      </div>
+    </div>
+
+    <!-- Active Case Switcher -->
+    <div class="nav-center">
+      <div class="case-selector-pill">
+        <label for="selectActiveCase">ACTIVE CRIME SCENE:</label>
+        <select id="selectActiveCase" class="case-dropdown"></select>
+      </div>
+    </div>
+
+    <div class="nav-right">
+      <button class="btn btn-secondary btn-sm" id="btnSyncData" title="Refresh case data">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg>
+        Sync Data
+      </button>
+      <div class="officer-pill">
+        <span class="officer-role">Crime Scene Lead / IO</span>
+        <span class="officer-name" id="topNavOfficer">Inspector R. K. Malhotra</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Incident Operations Summary Strip -->
+  <div class="incident-bar">
+    <div class="container-fluid flex-between">
+      <div class="incident-meta-group">
+        <span class="meta-item"><strong id="incCaseTitle">High-Rise Penthouse Homicide</strong></span>
+        <span class="separator">•</span>
+        <span class="meta-item" id="incCrimeType">Homicide / Burglary (BNS 103)</span>
+        <span class="separator">•</span>
+        <span class="meta-item" id="incLocation">Skyview Towers, Sector 18</span>
+        <span class="separator">•</span>
+        <span class="meta-item" id="incDateOccurred">Occurred: 27-Sep-2026</span>
+      </div>
+      <div class="dvi-phase-tag" id="incStatusTag">Active Crime Scene Triage</div>
+    </div>
+  </div>
+
+  <!-- Guided 4-Step CSI Investigation Workflow Bar -->
+  <div class="stepper-bar">
+    <div class="container-fluid">
+      <div class="stepper-grid">
+        <div class="step-card active" id="csiStep1" onclick="switchTab('tabCases')">
+          <div class="step-num">01</div>
+          <div class="step-info">
+            <div class="step-title">Scene Intake & FIR</div>
+            <div class="step-desc">Establish perimeter, log FIR and assign IO</div>
+          </div>
+        </div>
+        <div class="step-arrow">➔</div>
+        <div class="step-card" id="csiStep2" onclick="switchTab('tabEvidenceBoard')">
+          <div class="step-num">02</div>
+          <div class="step-info">
+            <div class="step-title">Log Physical Evidence</div>
+            <div class="step-desc">Capture weapons, biological stains, phones & prints</div>
+          </div>
+        </div>
+        <div class="step-arrow">➔</div>
+        <div class="step-card" id="csiStep3" onclick="switchTab('tabFSLQueue')">
+          <div class="step-num">03</div>
+          <div class="step-info">
+            <div class="step-title">AI Priority Triage</div>
+            <div class="step-desc">Degradation risk & ISO 17025 test mapping</div>
+          </div>
+        </div>
+        <div class="step-arrow">➔</div>
+        <div class="step-card" id="csiStep4" onclick="switchTab('tabReports')">
+          <div class="step-num">04</div>
+          <div class="step-info">
+            <div class="step-title">Form 27 FSL Dispatch</div>
+            <div class="step-desc">Court-admissible chain of custody manifest</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Operational Metrics Ticker -->
+  <div class="metrics-bar">
+    <div class="container-fluid grid-metrics">
+      <div class="metric-card">
+        <div class="metric-label">Total Evidence Items</div>
+        <div class="metric-val text-cyan" id="metricTotalEvidence">6</div>
+        <div class="metric-sub">Logged from Scene</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Critical Priority</div>
+        <div class="metric-val text-rose" id="metricCriticalCount">2</div>
+        <div class="metric-sub">Score &ge; 85 (Immediate Dispatch)</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">High Priority</div>
+        <div class="metric-val text-amber" id="metricHighCount">2</div>
+        <div class="metric-sub">Score 70–84 (24h Queue)</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Urgent Action Alert</div>
+        <div class="metric-val text-emerald" id="metricUrgentAction">2</div>
+        <div class="metric-sub">Cold Chain / Faraday Risk</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">FSL Reports Issued</div>
+        <div class="metric-val text-purple" id="metricReportCount">0</div>
+        <div class="metric-sub">Form 27 Dossiers</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Urgent Action Banner -->
+  <div class="container-fluid mt-3" id="urgentBannerContainer" style="display: none;">
+    <div class="urgent-alert-banner">
+      <div class="alert-icon">⚠️</div>
+      <div class="alert-text">
+        <strong>CRITICAL FORENSIC ACTION REQUIRED:</strong>
+        <span id="urgentBannerText">1 or more evidence items in this case are subject to rapid degradation or power drain. Prioritize immediate lab dispatch.</span>
+      </div>
+      <button class="btn btn-sm btn-danger" onclick="filterByPriority('CRITICAL')">View Critical Items</button>
+    </div>
+  </div>
+
+  <!-- Main Navigation Tabs -->
+  <div class="main-tabs-wrapper mt-3">
+    <div class="container-fluid">
+      <nav class="main-tabs">
+        <button class="tab-link active" data-tab="tabEvidenceBoard">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+          Evidence Triage Board
+        </button>
+        <button class="tab-link" data-tab="tabFSLQueue">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="10" x2="21" y1="6" y2="6"/><line x1="10" x2="21" y1="12" y2="12"/><line x1="10" x2="21" y1="18" y2="18"/><path d="M4 6h1v4"/><path d="M4 10h2"/><path d="M6 18H4c0-1 2-2 2-3s-1-1.5-2-1"/></svg>
+          Ranked FSL Lab Queue
+        </button>
+        <button class="tab-link" data-tab="tabInspector">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          Forensic Deep Inspector & Simulator
+        </button>
+        <button class="tab-link" data-tab="tabCases">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 8 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/></svg>
+          Crime Scene Cases (<span id="tabCaseCount">3</span>)
+        </button>
+        <button class="tab-link" data-tab="tabReports">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          FSL Form 27 Reports (<span id="tabReportCount">0</span>)
+        </button>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Primary Application Body -->
+  <main class="app-content container-fluid">
+
+    <!-- ========================================== -->
+    <!-- TAB 1: EVIDENCE TRIAGE BOARD               -->
+    <!-- ========================================== -->
+    <section id="tabEvidenceBoard" class="tab-panel active">
+      <div class="panel-header-row">
+        <div>
+          <h2 class="panel-title">Crime Scene Evidence Log & Priority Triage</h2>
+          <p class="panel-subtitle">All physical, biological, ballistic, and digital evidence logged with real-time AI priority scoring.</p>
+        </div>
+        <div class="action-btn-group">
+          <button class="btn btn-primary" id="btnOpenAddEvidenceModal">
+            + Log New Evidence Item
+          </button>
+          <button class="btn btn-success" id="btnOpenGenerateReportModal">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            Generate FSL Form 27 Dossier
+          </button>
+        </div>
+      </div>
+
+      <!-- Filter Controls Bar -->
+      <div class="card filter-bar-card mb-4">
+        <div class="card-body py-2 flex-between flex-wrap gap-2">
+          <div class="filter-group">
+            <span class="filter-label">Filter Priority:</span>
+            <div class="btn-group-pills">
+              <button class="pill-btn active" data-filter-priority="ALL">All</button>
+              <button class="pill-btn pill-rose" data-filter-priority="CRITICAL">Critical</button>
+              <button class="pill-btn pill-amber" data-filter-priority="HIGH">High</button>
+              <button class="pill-btn pill-cyan" data-filter-priority="MEDIUM">Medium</button>
+              <button class="pill-btn pill-muted" data-filter-priority="LOW">Low</button>
+            </div>
+          </div>
+
+          <div class="filter-group">
+            <span class="filter-label">Evidence Type:</span>
+            <select id="filterTypeSelect" class="form-select form-select-sm">
+              <option value="ALL">All Evidence Types</option>
+              <option value="Biological">Biological / DNA</option>
+              <option value="Digital">Digital / Cyber</option>
+              <option value="Ballistics">Ballistics</option>
+              <option value="Fingerprints">Latent Fingerprints</option>
+              <option value="Chemical">Chemical / Explosives</option>
+              <option value="Trace">Trace / Fiber</option>
+              <option value="Questioned">Questioned Documents</option>
+            </select>
+          </div>
+
+          <div class="filter-group">
+            <input type="text" id="evidenceSearchInput" class="form-input form-input-sm" placeholder="Search evidence, tag, location...">
+          </div>
+        </div>
+      </div>
+
+      <!-- Evidence Table -->
+      <div class="card">
+        <div class="card-body p-0">
+          <div class="table-responsive">
+            <table class="tactical-table" id="evidenceTable">
+              <thead>
+                <tr>
+                  <th style="width: 10%;">Evidence ID</th>
+                  <th style="width: 22%;">Item Name & Description</th>
+                  <th style="width: 16%;">Evidence Type & Subtype</th>
+                  <th style="width: 12%;">Priority Level</th>
+                  <th style="width: 10%;">Priority Score</th>
+                  <th style="width: 18%;">Recommended FSL Examination</th>
+                  <th style="width: 12%;">Action</th>
+                </tr>
+              </thead>
+              <tbody id="evidenceTableBody">
+                <!-- Injected dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- TAB 2: RANKED FSL LAB QUEUE                -->
+    <!-- ========================================== -->
+    <section id="tabFSLQueue" class="tab-panel">
+      <div class="panel-header-row">
+        <div>
+          <h2 class="panel-title">Forensic Science Laboratory (FSL) Ranked Examination Queue</h2>
+          <p class="panel-subtitle">Items ordered strictly by degradation risk, probative weight, and statutory remand deadlines.</p>
+        </div>
+        <button class="btn btn-outline" onclick="window.print()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect width="12" height="8" x="6" y="14"/></svg>
+          Print Lab Queue Sheet
+        </button>
+      </div>
+
+      <div class="fsl-queue-container" id="fslQueueContainer">
+        <!-- Injected dynamically -->
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- TAB 3: FORENSIC DEEP INSPECTOR & SIMULATOR -->
+    <!-- ========================================== -->
+    <section id="tabInspector" class="tab-panel">
+      <div class="panel-header-row">
+        <div>
+          <h2 class="panel-title">Forensic Deep Inspector & Live Triage Simulator</h2>
+          <p class="panel-subtitle">Audit the exact mathematical weights, ISO/IEC 17025 scientific rationale, and simulate risk adjustments.</p>
+        </div>
+        <div class="selector-group">
+          <label class="select-label">Inspect Item:</label>
+          <select id="selectInspectorItem" class="form-select"></select>
+        </div>
+      </div>
+
+      <div class="inspector-layout" id="inspectorContent">
+        <!-- Injected dynamically -->
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- TAB 4: CRIME SCENE CASES REGISTRY          -->
+    <!-- ========================================== -->
+    <section id="tabCases" class="tab-panel">
+      <div class="panel-header-row">
+        <div>
+          <h2 class="panel-title">Crime Scene Cases Registry</h2>
+          <p class="panel-subtitle">Manage multiple active crime scenes, investigation units, and case files.</p>
+        </div>
+        <button class="btn btn-primary" id="btnOpenNewCaseModal">
+          + Create New Crime Scene Case
+        </button>
+      </div>
+
+      <div class="grid-cards-3" id="casesGrid">
+        <!-- Injected dynamically -->
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- TAB 5: FSL FORM 27 SUBMISSION REPORTS      -->
+    <!-- ========================================== -->
+    <section id="tabReports" class="tab-panel">
+      <div class="panel-header-row">
+        <div>
+          <h2 class="panel-title">Official FSL Form 27 Requisition Dossiers</h2>
+          <p class="panel-subtitle">Standardized laboratory dispatch manifests, chain of custody certificates, and test orders.</p>
+        </div>
+        <button class="btn btn-secondary" onclick="window.print()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect width="12" height="8" x="6" y="14"/></svg>
+          Print Form 27 Dossier
+        </button>
+      </div>
+
+      <div class="reports-layout">
+        <div class="reports-sidebar">
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Generated Dossiers</span>
+            </div>
+            <div class="card-body p-0">
+              <div class="recon-selection-list" id="reportsListSidebar">
+                <!-- Injected dynamically -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="reports-preview-area">
+          <div class="card report-paper" id="reportPaper">
+            <div class="report-empty" id="reportEmptyMessage">
+              Select a dossier on the left or click "Generate FSL Form 27 Dossier" from the Evidence Board to preview and export.
+            </div>
+            <div class="report-content" id="reportPaperContent" style="display: none;">
+              <!-- Injected dynamically -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- MODALS -->
+  <div class="modal-backdrop" id="modalAddEvidence">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3>Log New Crime Scene Evidence Item</h3>
+        <button class="modal-close" onclick="closeModal('modalAddEvidence')">&times;</button>
+      </div>
+      <form id="formAddEvidence">
+        <div class="modal-body">
+          <div class="form-row-2">
+            <div class="form-group">
+              <label>Evidence Item Name *</label>
+              <input type="text" name="evidenceName" class="form-input" required placeholder="e.g. Fired 9mm Bullet Projectile">
+            </div>
+            <div class="form-group">
+              <label>Evidence Type *</label>
+              <select name="evidenceType" id="modalEvidenceType" class="form-select" required>
+                <option value="Biological / DNA">Biological / DNA</option>
+                <option value="Digital / Cyber">Digital / Cyber</option>
+                <option value="Ballistics">Ballistics</option>
+                <option value="Latent Fingerprints">Latent Fingerprints</option>
+                <option value="Chemical / Explosives">Chemical / Explosives</option>
+                <option value="Trace / Fiber">Trace / Fiber</option>
+                <option value="Questioned Documents">Questioned Documents</option>
+                <option value="Physical / Toolmark">Physical / Toolmark</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label>Subtype / Classification</label>
+              <input type="text" name="subType" class="form-input" placeholder="e.g. Spent Projectile / Toolmark Trace">
+            </div>
+            <div class="form-group">
+              <label>Recovery Location / Crime Scene Grid *</label>
+              <input type="text" name="seizedLocation" class="form-input" required placeholder="e.g. Study room north wall plaster">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Item Description & Physical Condition</label>
+            <textarea name="description" class="form-input form-textarea" rows="2" placeholder="e.g. Deformed copper jacketed bullet with visible rifling grooves..."></textarea>
+          </div>
+
+          <div class="form-row-3">
+            <div class="form-group">
+              <label>Degradation Risk *</label>
+              <select name="degradationRisk" id="modalDegradation" class="form-select">
+                <option value="CRITICAL">Critical (Rapid Decay/Power Loss)</option>
+                <option value="HIGH">High (Biological/Volatile)</option>
+                <option value="MEDIUM" selected>Medium (Standard Shelf Stability)</option>
+                <option value="LOW">Low (Inert/Stable Metal)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Probative Case Linkage *</label>
+              <select name="probativeValue" id="modalProbative" class="form-select">
+                <option value="CRITICAL" selected>Critical (Direct Murder Weapon/Prime Suspect)</option>
+                <option value="HIGH">High (Suspect MO/Entry-Exit)</option>
+                <option value="MEDIUM">Medium (Secondary Context)</option>
+                <option value="LOW">Low (Ambient/Circumstantial)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Statutory / Remand Urgency *</label>
+              <select name="statutoryUrgency" id="modalUrgency" class="form-select">
+                <option value="CRITICAL">Critical (24h Remand/Fleeing Suspect)</option>
+                <option value="HIGH" selected>High (Fast-Track Trial Lead)</option>
+                <option value="MEDIUM">Medium (Standard Investigation)</option>
+                <option value="LOW">Low (Routine Archive)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="live-score-box">
+            <div class="flex-between">
+              <span class="live-score-title">AI Triage Preview:</span>
+              <span class="live-score-badge tag tag-emerald" id="liveScoreBadge">85 / 100 — CRITICAL</span>
+            </div>
+            <div class="live-score-reason" id="liveScoreReason">
+              Evaluating scoring factors...
+            </div>
+          </div>
+
+          <div class="form-group mt-2">
+            <label>Suspected Investigative Relevance</label>
+            <textarea name="suspectedRelevance" class="form-input form-textarea" rows="2" placeholder="e.g. Fired from murder weapon; direct link to suspect firearm..."></textarea>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label>Packaging & Preservation Protocol</label>
+              <input type="text" name="packagingDetails" class="form-input" placeholder="e.g. Rigid padded container, sterile seal">
+            </div>
+            <div class="form-group">
+              <label>Seizing Officer Name</label>
+              <input type="text" name="collectedBy" class="form-input" value="Dr. Ananya Sen (Senior CSI)">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" onclick="closeModal('modalAddEvidence')">Cancel</button>
+          <button type="submit" class="btn btn-primary">Log & Prioritize Evidence</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="modalNewCase">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3>Create New Crime Scene Investigation Case</h3>
+        <button class="modal-close" onclick="closeModal('modalNewCase')">&times;</button>
+      </div>
+      <form id="formNewCase">
+        <div class="modal-body">
+          <div class="form-row-2">
+            <div class="form-group">
+              <label>Case Title *</label>
+              <input type="text" name="caseTitle" class="form-input" required placeholder="e.g. Industrial Warehouse Arson & Murder">
+            </div>
+            <div class="form-group">
+              <label>Crime Classification (IPC / BNS) *</label>
+              <input type="text" name="crimeType" class="form-input" required placeholder="e.g. Homicide / Arson (BNS 103 / BNS 326)">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Crime Scene Location / Address *</label>
+            <input type="text" name="location" class="form-input" required placeholder="e.g. Plot 42, Heavy Industrial Estate, Sector 9">
+          </div>
+
+          <div class="form-group">
+            <label>Case Narrative / Scene Synopsis</label>
+            <textarea name="description" class="form-input form-textarea" rows="3" placeholder="Brief summary of crime scene findings..."></textarea>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label>Investigating Officer (IO) *</label>
+              <input type="text" name="investigatingOfficer" class="form-input" required value="Inspector V. Saxena (Crime Branch)">
+            </div>
+            <div class="form-group">
+              <label>Lead Forensic CSI Specialist *</label>
+              <input type="text" name="leadForensicInvestigator" class="form-input" required value="Dr. Ananya Sen (Senior CSI)">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" onclick="closeModal('modalNewCase')">Cancel</button>
+          <button type="submit" class="btn btn-primary">Create Crime Case</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="modalGenerateFSLReport">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3>Generate FSL Form 27 / Evidence Requisition Dossier</h3>
+        <button class="modal-close" onclick="closeModal('modalGenerateFSLReport')">&times;</button>
+      </div>
+      <form id="formGenerateFSLReport">
+        <div class="modal-body">
+          <div class="alert-box alert-success mb-3">
+            <strong>State Forensic Science Laboratory (SFSL) Requisition:</strong> Packages all case evidence items with AI priority scores, recommended specialized examinations, and tamper-evident chain of custody hashes.
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label>Target FSL Directorate *</label>
+              <input type="text" id="reportLabDirectorate" class="form-input" required value="State Forensic Science Laboratory (SFSL), Central Directorate">
+            </div>
+            <div class="form-group">
+              <label>Submission Priority Classification *</label>
+              <select id="reportPriorityCat" class="form-select">
+                <option value="CRITICAL_FAST_TRACK">CRITICAL FAST-TRACK (Statutory Remand / Urgent Lead)</option>
+                <option value="HIGH_PRIORITY">HIGH PRIORITY (24–48 Hour Target)</option>
+                <option value="ROUTINE_ANALYSIS">ROUTINE ANALYSIS (Standard Docket)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Investigating Officer Formal Sign-Off *</label>
+            <input type="text" id="reportOfficerName" class="form-input" required value="Inspector R. K. Malhotra, Investigating Officer">
+          </div>
+
+          <div class="form-group">
+            <label>Special Instructions & Crime Scene Hypotheses for Forensic Experts</label>
+            <textarea id="reportOfficialNotes" class="form-input form-textarea" rows="3">Please expedite biological DNA extraction on knife handle and urgent chip-off examination on locked iPhone 14 Pro for victim-suspect communication records. Chain of custody intact under seal #SEC-2026-089.</textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" onclick="closeModal('modalGenerateFSLReport')">Cancel</button>
+          <button type="submit" class="btn btn-success">Issue Form 27 & Export Dossier</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

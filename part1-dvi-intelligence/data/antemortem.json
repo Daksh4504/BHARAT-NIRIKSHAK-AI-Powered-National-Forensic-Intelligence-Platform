@@ -1,0 +1,167 @@
+[
+  {
+    "id": "AM-2026-001",
+    "fullName": "Amit Sharma",
+    "caseRef": "MP-METRO-101",
+    "age": 34,
+    "gender": "Male",
+    "heightCm": 174,
+    "build": "Medium athletic",
+    "bloodGroup": "B+",
+    "hairDescription": "Short straight black hair, receding hairline",
+    "eyeColor": "Dark Brown",
+    "scarsAndMarks": "Linear 6cm surgical scar in right lower abdomen (appendectomy, 2018)",
+    "tattoos": "None reported",
+    "dentalRecord": {
+      "crowns": "Tooth #16 (Upper Right 1st Molar) Full Cast Gold Crown",
+      "missingTeeth": "Tooth #31 (Lower Right Central Incisor) lost in childhood",
+      "fillings": "Occlusal composite restorations on #46, #47",
+      "braces": "None",
+      "details": "Regular dental checkups; gold crown placed by Dr. Gupta (Dental Clinic Delhi, records on file)"
+    },
+    "surgicalMedicalHistory": "Appendectomy (2018), no orthopedic metal implants",
+    "clothingDescription": "Navy blue cotton polo t-shirt, dark denim jeans, brown leather belt with brass buckle",
+    "personalEffects": "Silver signet ring engraved with initials 'A.S.' on right pinky finger, steel Casio wrist watch",
+    "dnaProfileStatus": "Available (Blood sample from biological father on file)",
+    "reporterContact": {
+      "name": "Sunita Sharma",
+      "relation": "Spouse",
+      "phone": "+91-98110-23456"
+    },
+    "status": "Confirmed Identified",
+    "reconciledBodyId": "PM-2026-081",
+    "createdAt": "2026-09-26T08:30:00.000Z"
+  },
+  {
+    "id": "AM-2026-002",
+    "fullName": "Rajesh Varma",
+    "caseRef": "MP-METRO-102",
+    "age": 42,
+    "gender": "Male",
+    "heightCm": 180,
+    "build": "Heavyset muscular",
+    "bloodGroup": "O+",
+    "hairDescription": "Thick wavy dark brown hair, trimmed beard",
+    "eyeColor": "Brown",
+    "scarsAndMarks": "5cm surgical scar along left shin with palpated underlying surgical plate",
+    "tattoos": "Tribal scorpion tattoo on outer surface of left forearm (approx 8cm)",
+    "dentalRecord": {
+      "crowns": "Porcelain fused to metal crown on Tooth #24",
+      "missingTeeth": "Third molars (wisdom teeth #18, #28, #38, #48) extracted surgically",
+      "fillings": "Amalgam filling on #36",
+      "braces": "None",
+      "details": "Dental X-rays obtained from military dental center (2022)"
+    },
+    "surgicalMedicalHistory": "Open reduction internal fixation (ORIF) left tibia with titanium plate & 6 cortical screws (Road accident 2021)",
+    "clothingDescription": "Grey ripstop cargo trousers, dark grey high-visibility work jacket with orange reflective striping",
+    "personalEffects": "Heavy stainless steel chain with religious pendant, black digital G-Shock watch",
+    "dnaProfileStatus": "Available (Buccal swab from biological son collected)",
+    "reporterContact": {
+      "name": "Meera Varma",
+      "relation": "Sister",
+      "phone": "+91-97234-88901"
+    },
+    "status": "Reported Missing",
+    "reconciledBodyId": null,
+    "createdAt": "2026-09-26T09:15:00.000Z"
+  },
+  {
+    "id": "AM-2026-003",
+    "fullName": "Priya Nair",
+    "caseRef": "MP-METRO-103",
+    "age": 29,
+    "gender": "Female",
+    "heightCm": 162,
+    "build": "Slender",
+    "bloodGroup": "A+",
+    "hairDescription": "Long black hair, usually tied in ponytail",
+    "eyeColor": "Black",
+    "scarsAndMarks": "Faint 2cm childhood burn scar on left dorsal forearm",
+    "tattoos": "Small stylized butterfly outline tattoo behind left ear (post-auricular)",
+    "dentalRecord": {
+      "crowns": "Porcelain aesthetic veneer on Tooth #21 (Upper Left Central Incisor)",
+      "missingTeeth": "No missing teeth",
+      "fillings": "Composite tooth-colored fillings on #14, #15",
+      "braces": "Prior orthodontic treatment completed 2016, fixed lingual retainer wire on lower anterior teeth",
+      "details": "Complete digital panoramic radiograph (OPG) provided by cosmetic dental clinic"
+    },
+    "surgicalMedicalHistory": "Tonsillectomy in childhood, no major implants",
+    "clothingDescription": "Yellow printed cotton kurti top with white embroidery, dark leggings",
+    "personalEffects": "Small gold nose stud with tiny diamond, Fitbit fitness band with teal strap, silver anklet on left ankle",
+    "dnaProfileStatus": "Available (Toothbrush personal reference sample secured)",
+    "reporterContact": {
+      "name": "K. V. Nair",
+      "relation": "Father",
+      "phone": "+91-94471-55620"
+    },
+    "status": "Reported Missing",
+    "reconciledBodyId": null,
+    "createdAt": "2026-09-26T10:00:00.000Z"
+  },
+  {
+    "id": "AM-2026-004",
+    "fullName": "Sneha Sen",
+    "caseRef": "MP-METRO-104",
+    "age": 38,
+    "gender": "Female",
+    "heightCm": 158,
+    "build": "Medium",
+    "bloodGroup": "AB+",
+    "hairDescription": "Shoulder-length black hair with reddish henna highlights",
+    "eyeColor": "Brown",
+    "scarsAndMarks": "Horizontal 12cm Pfannenstiel surgical scar in lower abdomen (Caesarean section, 2019)",
+    "tattoos": "None",
+    "dentalRecord": {
+      "crowns": "None",
+      "missingTeeth": "Tooth #46 (Lower Right 1st Molar) missing",
+      "fillings": "Multiple composite fillings",
+      "braces": "None",
+      "details": "Dental treatment records requested from family practitioner"
+    },
+    "surgicalMedicalHistory": "Lower segment Caesarean section (2019)",
+    "clothingDescription": "Maroon synthetic cardigan over beige top, dark slacks",
+    "personalEffects": "Titanium spectacles with oval frames, rose gold wedding band engraved 'R & S 2017'",
+    "dnaProfileStatus": "Pending (Mother traveling from Kolkata to provide buccal sample)",
+    "reporterContact": {
+      "name": "Rohan Sen",
+      "relation": "Husband",
+      "phone": "+91-98301-44789"
+    },
+    "status": "Reported Missing",
+    "reconciledBodyId": null,
+    "createdAt": "2026-09-26T11:20:00.000Z"
+  },
+  {
+    "id": "AM-2026-005",
+    "fullName": "Vikram Rathore",
+    "caseRef": "MP-METRO-105",
+    "age": 48,
+    "gender": "Male",
+    "heightCm": 170,
+    "build": "Stocky",
+    "bloodGroup": "O-",
+    "hairDescription": "Short grey-black hair, clean shaven",
+    "eyeColor": "Hazel",
+    "scarsAndMarks": "Notched traumatic scar 3cm across left jawline / chin from industrial accident (2015)",
+    "tattoos": "Om symbol in Devanagari on right dorsal hand between thumb and index finger",
+    "dentalRecord": {
+      "crowns": "None",
+      "missingTeeth": "Tooth #37 and #47 (Lower 2nd Molars bilaterally) missing with healed alveolar ridge",
+      "fillings": "Heavy nicotine stains on lingual surface of anterior teeth",
+      "braces": "None",
+      "details": "Dental extraction records from municipal dispensary 2018"
+    },
+    "surgicalMedicalHistory": "Hypertension, heavy smoker, no surgical implants",
+    "clothingDescription": "Khaki technician uniform work shirt, navy heavy canvas trousers, steel-toed boots",
+    "personalEffects": "Copper magnetic health bracelet on right wrist, leather key pouch with 4 master keys",
+    "dnaProfileStatus": "Available (Blood reference taken from adult daughter)",
+    "reporterContact": {
+      "name": "Pooja Rathore",
+      "relation": "Daughter",
+      "phone": "+91-99881-33210"
+    },
+    "status": "Reported Missing",
+    "reconciledBodyId": null,
+    "createdAt": "2026-09-26T12:05:00.000Z"
+  }
+]

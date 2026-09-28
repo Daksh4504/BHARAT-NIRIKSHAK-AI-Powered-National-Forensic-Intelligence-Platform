@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DVI Intelligence | AI Disaster Victim Identification Platform</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Top Tactical Navigation Bar -->
+  <header class="top-nav">
+    <div class="nav-left">
+      <div class="badge-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          <path d="m9 12 2 2 4-4"/>
+        </svg>
+      </div>
+      <div>
+        <div class="brand-title">DVI INTELLIGENCE</div>
+        <div class="brand-sub">AI Disaster Victim Identification • Interpol Standard AM/PM Reconciliation</div>
+      </div>
+    </div>
+
+    <div class="nav-center">
+      <div class="incident-badge" id="incidentHeaderBadge">
+        <span class="pulse-dot"></span>
+        <span id="headerIncidentText">INCIDENT: DIS-2026-METRO • OPERATION METRO-TRIDENT</span>
+      </div>
+    </div>
+
+    <div class="nav-right">
+      <button class="btn btn-secondary btn-sm" id="btnRefreshData" title="Refresh all case data">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/></svg>
+        Sync Data
+      </button>
+      <div class="officer-pill">
+        <span class="officer-role">Forensic Pathologist On-Duty</span>
+        <span class="officer-name">Dr. K. S. Mehra (SFSL)</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Incident Operations Summary Strip -->
+  <div class="incident-bar">
+    <div class="container-fluid flex-between">
+      <div class="incident-meta-group">
+        <span class="meta-item"><strong id="incOpName">Operation Metro-Trident</strong></span>
+        <span class="separator">•</span>
+        <span class="meta-item" id="incLocation">Sector 4 Underground Works</span>
+        <span class="separator">•</span>
+        <span class="meta-item" id="incDate">Occurred: 26-Sep-2026</span>
+        <span class="separator">•</span>
+        <span class="meta-item" id="incAgency">Lead: State Forensic Science Laboratory</span>
+      </div>
+      <div class="dvi-phase-tag" id="incStatusTag">Active Identification Phase</div>
+    </div>
+  </div>
+
+  <!-- Guided 4-Step Investigation Workflow Bar -->
+  <div class="stepper-bar">
+    <div class="container-fluid">
+      <div class="stepper-grid">
+        <div class="step-card active" id="step1" onclick="switchTab('tabPM')">
+          <div class="step-num">01</div>
+          <div class="step-info">
+            <div class="step-title">Recover & Chart Remains</div>
+            <div class="step-desc">Autopsy, dental charting & DNA extraction (PM)</div>
+          </div>
+        </div>
+        <div class="step-arrow">➔</div>
+        <div class="step-card" id="step2" onclick="switchTab('tabAM')">
+          <div class="step-num">02</div>
+          <div class="step-info">
+            <div class="step-title">Ingest Missing Dossiers</div>
+            <div class="step-desc">Dental clinic X-rays & family reference (AM)</div>
+          </div>
+        </div>
+        <div class="step-arrow">➔</div>
+        <div class="step-card" id="step3" onclick="switchTab('tabMatching')">
+          <div class="step-num">03</div>
+          <div class="step-info">
+            <div class="step-title">AI Scientific Matching</div>
+            <div class="step-desc">Odontology, DNA & anatomical correlation</div>
+          </div>
+        </div>
+        <div class="step-arrow">➔</div>
+        <div class="step-card" id="step4" onclick="switchTab('tabReports')">
+          <div class="step-num">04</div>
+          <div class="step-info">
+            <div class="step-title">Certify DVI Dossier</div>
+            <div class="step-desc">Signed Interpol certificate for mortal release</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Operational Metrics Ticker -->
+  <div class="metrics-bar">
+    <div class="container-fluid grid-metrics">
+      <div class="metric-card">
+        <div class="metric-label">Unidentified Bodies (PM)</div>
+        <div class="metric-val text-cyan" id="metricTotalPM">4</div>
+        <div class="metric-sub">Autopsied & Charted</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Missing Persons (AM)</div>
+        <div class="metric-val text-amber" id="metricTotalAM">5</div>
+        <div class="metric-sub">Ante-Mortem Records</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">High-Confidence Matches</div>
+        <div class="metric-val text-emerald" id="metricHighConfidence">3</div>
+        <div class="metric-sub">&ge;85% Scientific Score</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Officially Reconciled</div>
+        <div class="metric-val text-purple" id="metricReconciled">1</div>
+        <div class="metric-sub">Signed DVI Dossiers</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Unreconciled Backlog</div>
+        <div class="metric-val text-rose" id="metricBacklog">3</div>
+        <div class="metric-sub">Active Triage Required</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Navigation Tabs -->
+  <div class="main-tabs-wrapper">
+    <div class="container-fluid">
+      <nav class="main-tabs">
+        <button class="tab-link active" data-tab="tabDashboard">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+          Case Dashboard
+        </button>
+        <button class="tab-link" data-tab="tabMatching">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24"/><path d="m14.83 9.17 4.24-4.24"/><path d="m14.83 14.83 4.24 4.24"/><path d="m9.17 14.83-4.24 4.24"/></svg>
+          Matching & Odontogram Workbench
+        </button>
+        <button class="tab-link" data-tab="tabPM">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Unidentified Bodies (PM)
+        </button>
+        <button class="tab-link" data-tab="tabAM">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          Missing Persons (AM)
+        </button>
+        <button class="tab-link" data-tab="tabReports">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          Reconciliation Reports (<span id="tabReconCountBadge">1</span>)
+        </button>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Primary Application Body -->
+  <main class="app-content container-fluid">
+
+    <!-- ========================================== -->
+    <!-- TAB 1: CASE DASHBOARD                     -->
+    <!-- ========================================== -->
+    <section id="tabDashboard" class="tab-panel active">
+      <div class="panel-header-row">
+        <div>
+          <h2 class="panel-title">Disaster Victim Triage & Automated Match Matrix</h2>
+          <p class="panel-subtitle">Comprehensive overview of all recovered human remains and real-time scientific cross-matching.</p>
+        </div>
+        <div class="action-btn-group">
+          <button class="btn btn-primary" id="btnLaunchBatchMatch">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            Execute Global Auto-Match
+          </button>
+          <button class="btn btn-outline" id="btnOpenNewPMModal">
+            + Log Body (PM)
+          </button>
+          <button class="btn btn-outline" id="btnOpenNewAMModal">
+            + File Missing Profile (AM)
+          </button>
+        </div>
+      </div>
+
+      <!-- Dashboard Grid -->
+      <div class="dashboard-grid">
+        <div class="card dashboard-main-card">
+          <div class="card-header flex-between">
+            <div class="card-title-group">
+              <span class="card-title">Live Unidentified Remains Triage Board</span>
+              <span class="card-badge" id="bodyCountTag">4 Remains Cataloged</span>
+            </div>
+            <div class="filter-controls">
+              <input type="text" id="dashSearchInput" class="form-input form-input-sm" placeholder="Filter by location, code, age...">
+            </div>
+          </div>
+          <div class="card-body p-0">
+            <div class="table-responsive">
+              <table class="tactical-table" id="dashboardTriageTable">
+                <thead>
+                  <tr>
+                    <th style="width: 14%;">PM Body ID</th>
+                    <th style="width: 22%;">Recovery Site & Date</th>
+                    <th style="width: 16%;">Sex & Est. Age</th>
+                    <th style="width: 22%;">Top AM Candidate</th>
+                    <th style="width: 14%;">Concordance</th>
+                    <th style="width: 12%;">Action</th>
+                  </tr>
+                </thead>
+                <tbody id="dashboardTriageBody">
+                  <!-- Injected dynamically -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Side: Interpol Hierarchy & Verified Log -->
+        <div class="dashboard-side-col">
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Interpol DVI Scientific Hierarchy</span>
+            </div>
+            <div class="card-body">
+              <div class="protocol-step">
+                <div class="protocol-badge primary">Primary (Infallible)</div>
+                <div class="protocol-desc">
+                  <strong>Odontology, DNA & Fingerprints</strong><br>
+                  Stand-alone scientific proof. 1 matching gold crown or STR locus confirmation establishes positive ID.
+                </div>
+              </div>
+              <div class="protocol-step">
+                <div class="protocol-badge secondary">Secondary</div>
+                <div class="protocol-desc">
+                  <strong>Surgical Implants & Tattoos</strong><br>
+                  Unique hardware serials, surgical scars (e.g. appendectomy, ORIF plate), dermal body art.
+                </div>
+              </div>
+              <div class="protocol-step">
+                <div class="protocol-badge auxiliary">Auxiliary (Corroborative)</div>
+                <div class="protocol-desc">
+                  <strong>Clothing & Personal Effects</strong><br>
+                  Engraved jewelry, branded watches, textile remnants. Corroborates primary/secondary proof.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card mt-4">
+            <div class="card-header flex-between">
+              <span class="card-title">Certified Reconciliations</span>
+              <span class="card-badge" id="miniReconBadge">1 Dossier</span>
+            </div>
+            <div class="card-body p-0">
+              <div class="recon-mini-list" id="dashboardMiniReconList">
+                <!-- Injected dynamically -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- TAB 2: MATCHING & ODONTOGRAM WORKBENCH    -->
+    <!-- ========================================== -->
+    <section id="tabMatching" class="tab-panel">
+      <div class="panel-header-row">
+        <div>
+          <h2 class="panel-title">Forensic Matching & Interactive Odontogram Workbench</h2>
+          <p class="panel-subtitle">Compare ante-mortem and post-mortem dental restorations, DNA profiles, and anatomical markers.</p>
+        </div>
+        <div class="action-btn-group">
+          <div class="selector-group">
+            <label for="selectPMSubject" class="select-label">Target Body (PM):</label>
+            <select id="selectPMSubject" class="form-select"></select>
+          </div>
+          <button class="btn btn-primary" id="btnRunComparison">
+            Evaluate Match Candidates
+          </button>
+        </div>
+      </div>
+
+      <!-- Target Subject Profile Card -->
+      <div class="subject-banner card mb-4" id="targetPMBanner">
+        <div class="subject-banner-content">
+          <div class="subject-col-main">
+            <div class="tag-row">
+              <span class="tag tag-cyan" id="targetPMCode">PM-2026-081</span>
+              <span class="tag tag-outline" id="targetPMRecNo">REC-081-METRO</span>
+              <span class="tag" id="targetPMStatusTag">Unreconciled</span>
+            </div>
+            <h3 class="subject-heading" id="targetPMLocation">Recovery: Substation Floor B2</h3>
+            <div class="subject-meta-grid">
+              <div><strong>Sex:</strong> <span id="targetPMSex">Male</span></div>
+              <div><strong>Est. Age:</strong> <span id="targetPMAge">30 - 36 yrs</span></div>
+              <div><strong>Est. Stature:</strong> <span id="targetPMHeight">173 ±3 cm</span></div>
+              <div><strong>Condition:</strong> <span id="targetPMCondition">Thermal burns on lower extremities, facial structures intact</span></div>
+            </div>
+          </div>
+          <div class="subject-col-forensic">
+            <div class="forensic-spec-box">
+              <div class="spec-label">Odontology / Dental Findings</div>
+              <div class="spec-text" id="targetPMDental">Tooth #16 full cast gold crown; #31 absent with alveolar closure.</div>
+            </div>
+            <div class="forensic-spec-box mt-2">
+              <div class="spec-label">Surgical Hardware & Anatomical Anomalies</div>
+              <div class="spec-text" id="targetPMSurgical">Linear scar 6.2cm right lower quadrant (appendectomy).</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Visual Dental Arch (Interactive Odontogram) -->
+      <div class="card mb-4">
+        <div class="card-header flex-between">
+          <div class="card-title-group">
+            <span class="card-title">Visual Forensic Odontogram (Tooth-by-Tooth Chart)</span>
+            <span class="card-badge">FDI Two-Digit Dental Notation</span>
+          </div>
+          <div class="odontogram-legend">
+            <span class="legend-chip chip-gold">● Gold Crown / Veneer</span>
+            <span class="legend-chip chip-missing">✕ Antemortem Missing</span>
+            <span class="legend-chip chip-composite">◆ Composite Filling</span>
+            <span class="legend-chip chip-normal">○ Intact Tooth</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="odontogram-wrapper">
+            <div class="jaw-section">
+              <div class="jaw-label">MAXILLARY ARCH (UPPER JAW)</div>
+              <div class="teeth-row" id="upperJawTeeth">
+                <!-- Upper jaw teeth generated by JS -->
+              </div>
+            </div>
+            <div class="jaw-divider"></div>
+            <div class="jaw-section">
+              <div class="jaw-label">MANDIBULAR ARCH (LOWER JAW)</div>
+              <div class="teeth-row" id="lowerJawTeeth">
+                <!-- Lower jaw teeth generated by JS -->
+              </div>
+            </div>
+          </div>
+          <div class="dental-summary-banner mt-3" id="dentalChartSummary">
+            Select a candidate below to view specific tooth-by-tooth concordance highlights.
+          </div>
+        </div>
+      </div>
+
+      <!-- Top 3 Candidates Section -->
+      <div class="section-title-bar">
+        <h3>Top Concordance Candidates (Transparent Scoring)</h3>
+        <span class="sub-hint">Profiles ranked by scientific attribute concordance</span>
+      </div>
+
+      <div class="top-candidates-grid" id="topCandidatesGrid">
+        <!-- Rendered by JS -->
+      </div>
+
+      <!-- Side-by-Side Detailed Forensic Comparison Inspection Matrix -->
+      <div class="card mt-4" id="deepComparisonCard">
+        <div class="card-header flex-between">
+          <div class="card-title-group">
+            <span class="card-title">Side-by-Side Forensic Attribute Comparison</span>
+            <span class="card-badge" id="compareBadge">Inspecting Candidate #1</span>
+          </div>
+          <div class="matrix-legend">
+            <span class="legend-item"><span class="badge-dot dot-match"></span> Conclusive Match</span>
+            <span class="legend-item"><span class="badge-dot dot-comp"></span> Compatible</span>
+            <span class="legend-item"><span class="badge-dot dot-mismatch"></span> Conflict / Mismatch</span>
+            <span class="legend-item"><span class="badge-dot dot-incon"></span> Inconclusive</span>
+          </div>
+        </div>
+        <div class="card-body p-0">
+          <div class="table-responsive">
+            <table class="tactical-table matrix-table" id="attributeComparisonTable">
+              <thead>
+                <tr>
+                  <th style="width: 18%;">Forensic Attribute</th>
+                  <th style="width: 32%;">Ante-Mortem Record (AM)</th>
+                  <th style="width: 32%;">Post-Mortem Findings (PM)</th>
+                  <th style="width: 18%;">Concordance & Findings</th>
+                </tr>
+              </thead>
+              <tbody id="attributeComparisonBody">
+                <!-- Injected dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card-footer rationale-footer">
+          <div class="rationale-container">
+            <div class="rationale-header">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+              <strong>Forensic Rationale & Reconciliation Assessment:</strong>
+            </div>
+            <div class="rationale-text" id="forensicRationaleSummary">
+              Select a candidate above to view the scientific rationale narrative.
+            </div>
+          </div>
+          <div class="rationale-actions mt-3 flex-between">
+            <div class="legal-disclaimer">
+              * Identification sign-off permanently links these records in accordance with Interpol DVI Guidelines.
+            </div>
+            <div class="btn-group">
+              <button class="btn btn-success btn-lg" id="btnConfirmReconciliation">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
+                Confirm Reconciliation (Official Sign-Off)
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- TAB 3: POST-MORTEM (UNIDENTIFIED BODIES)   -->
+    <!-- ========================================== -->
+    <section id="tabPM" class="tab-panel">
+      <div class="panel-header-row">
+        <div>
+          <h2 class="panel-title">Post-Mortem Unidentified Remains Registry (PM)</h2>
+          <p class="panel-subtitle">Catalog of recovered bodies, physical examination findings, dental charts, and recovery coordinates.</p>
+        </div>
+        <button class="btn btn-primary" id="btnOpenNewPMModal2">
+          + Record New Unidentified Remains
+        </button>
+      </div>
+
+      <div class="grid-cards-3" id="pmCardsGrid">
+        <!-- Injected dynamically -->
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- TAB 4: ANTE-MORTEM (MISSING PERSONS)       -->
+    <!-- ========================================== -->
+    <section id="tabAM" class="tab-panel">
+      <div class="panel-header-row">
+        <div>
+          <h2 class="panel-title">Ante-Mortem Missing Persons Registry (AM)</h2>
+          <p class="panel-subtitle">Disaster victim dossiers collected from families, dental clinics, medical records, and police reports.</p>
+        </div>
+        <button class="btn btn-primary" id="btnOpenNewAMModal2">
+          + Register Missing Person Profile
+        </button>
+      </div>
+
+      <div class="grid-cards-3" id="amCardsGrid">
+        <!-- Injected dynamically -->
+      </div>
+    </section>
+
+    <!-- ========================================== -->
+    <!-- TAB 5: RECONCILIATION REPORTS              -->
+    <!-- ========================================== -->
+    <section id="tabReports" class="tab-panel">
+      <div class="panel-header-row">
+        <div>
+          <h2 class="panel-title">Official DVI Reconciliation Dossiers</h2>
+          <p class="panel-subtitle">Standardized Interpol-format disaster victim identification certificates and scientific evidence dossiers.</p>
+        </div>
+        <button class="btn btn-secondary" onclick="window.print()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect width="12" height="8" x="6" y="14"/></svg>
+          Print / PDF Export
+        </button>
+      </div>
+
+      <div class="reports-layout">
+        <!-- Dossier List Sidebar -->
+        <div class="reports-sidebar">
+          <div class="card">
+            <div class="card-header">
+              <span class="card-title">Completed Reconciliations</span>
+            </div>
+            <div class="card-body p-0">
+              <div class="recon-selection-list" id="reconDossierList">
+                <!-- Injected dynamically -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Official Report Preview Pane -->
+        <div class="reports-preview-area">
+          <div class="card report-paper" id="reportPreviewPaper">
+            <div class="report-empty" id="reportEmptyState">
+              Select a completed reconciliation on the left or sign off a candidate from the Matching Workbench to view and export the official DVI Dossier.
+            </div>
+            <div class="report-content" id="reportPaperContent" style="display: none;">
+              <!-- Injected dynamically -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- MODALS -->
+  <div class="modal-backdrop" id="modalAM">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3>Create Ante-Mortem Profile (Missing Person)</h3>
+        <button class="modal-close" onclick="closeModal('modalAM')">&times;</button>
+      </div>
+      <form id="formNewAM">
+        <div class="modal-body">
+          <div class="form-row-2">
+            <div class="form-group">
+              <label>Full Name *</label>
+              <input type="text" name="fullName" class="form-input" required placeholder="e.g. Suresh Kumar">
+            </div>
+            <div class="form-group">
+              <label>Missing Report Ref / Case ID</label>
+              <input type="text" name="caseRef" class="form-input" placeholder="e.g. MP-METRO-106">
+            </div>
+          </div>
+
+          <div class="form-row-3">
+            <div class="form-group">
+              <label>Age (Years) *</label>
+              <input type="number" name="age" class="form-input" required min="1" max="110" value="32">
+            </div>
+            <div class="form-group">
+              <label>Gender *</label>
+              <select name="gender" class="form-select" required>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Indeterminate">Indeterminate</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Height (cm) *</label>
+              <input type="number" name="heightCm" class="form-input" required value="172">
+            </div>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label>Physical Build & Hair</label>
+              <input type="text" name="hairDescription" class="form-input" placeholder="e.g. Short black hair, medium build">
+            </div>
+            <div class="form-group">
+              <label>Eye Color & Complexion</label>
+              <input type="text" name="eyeColor" class="form-input" placeholder="e.g. Dark brown eyes, fair complexion">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Scars & Surgical History (Appendectomy, ORIF, etc.)</label>
+            <textarea name="scarsAndMarks" class="form-input form-textarea" rows="2" placeholder="e.g. 5cm linear appendectomy scar right lower quadrant"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label>Tattoos & Distinctive Marks</label>
+            <input type="text" name="tattoos" class="form-input" placeholder="e.g. Eagle tattoo on left bicep">
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label>Dental Crowns / Veneers</label>
+              <input type="text" name="dentalCrowns" class="form-input" placeholder="e.g. Gold crown on tooth #16 (upper right molar)">
+            </div>
+            <div class="form-group">
+              <label>Missing Teeth / Fillings</label>
+              <input type="text" name="dentalMissing" class="form-input" placeholder="e.g. Tooth #31 missing antemortem; composite fillings">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Clothing Worn When Last Seen</label>
+            <input type="text" name="clothingDescription" class="form-input" placeholder="e.g. Navy blue collar t-shirt, blue denim jeans">
+          </div>
+
+          <div class="form-group">
+            <label>Personal Effects, Jewelry & Watch</label>
+            <input type="text" name="personalEffects" class="form-input" placeholder="e.g. Silver ring engraved 'S.K.', black Casio watch">
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label>DNA Reference Sample Status</label>
+              <select name="dnaProfileStatus" class="form-select">
+                <option value="Available (Family reference sample on file)">Available (Family reference sample on file)</option>
+                <option value="Pending Sample Collection">Pending Sample Collection</option>
+                <option value="Unavailable">Unavailable</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Reporter / Next of Kin Contact</label>
+              <input type="text" name="reporterName" class="form-input" placeholder="e.g. Anjali Kumar (Spouse) +91-9876543210">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" onclick="closeModal('modalAM')">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Ante-Mortem Record</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="modalPM">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3>Record Unidentified Body (Post-Mortem)</h3>
+        <button class="modal-close" onclick="closeModal('modalPM')">&times;</button>
+      </div>
+      <form id="formNewPM">
+        <div class="modal-body">
+          <div class="form-row-2">
+            <div class="form-group">
+              <label>Recovery Location / Grid Sector *</label>
+              <input type="text" name="recoveryLocation" class="form-input" required placeholder="e.g. Sector 4 Tunnel Shaft 1B">
+            </div>
+            <div class="form-group">
+              <label>Recovery Tag / Body Bag ID</label>
+              <input type="text" name="recoveryNumber" class="form-input" placeholder="e.g. REC-085-METRO">
+            </div>
+          </div>
+
+          <div class="form-row-3">
+            <div class="form-group">
+              <label>Est. Age Min *</label>
+              <input type="number" name="estimatedAgeMin" class="form-input" required min="1" max="110" value="28">
+            </div>
+            <div class="form-group">
+              <label>Est. Age Max *</label>
+              <input type="number" name="estimatedAgeMax" class="form-input" required min="1" max="110" value="38">
+            </div>
+            <div class="form-group">
+              <label>Biological Sex *</label>
+              <select name="gender" class="form-select" required>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Indeterminate">Indeterminate</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label>Estimated Height (cm) *</label>
+              <input type="number" name="estimatedHeightCm" class="form-input" required value="171">
+            </div>
+            <div class="form-group">
+              <label>Tolerance (± cm)</label>
+              <input type="number" name="heightToleranceCm" class="form-input" value="3">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Remains Condition / Trauma</label>
+            <input type="text" name="bodyCondition" class="form-input" placeholder="e.g. Moderate thermal burns, facial structures intact">
+          </div>
+
+          <div class="form-group">
+            <label>Observed Scars, Marks & Surgical Hardware</label>
+            <textarea name="scarsAndMarks" class="form-input form-textarea" rows="2" placeholder="e.g. Right iliac fossa surgical scar 6cm"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label>Observed Tattoos / Body Art</label>
+            <input type="text" name="tattoos" class="form-input" placeholder="e.g. Tattoo pigment remnant on forearm">
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label>Dental Findings (Crowns / Veneers)</label>
+              <input type="text" name="dentalCrowns" class="form-input" placeholder="e.g. Cast gold crown present on tooth #16">
+            </div>
+            <div class="form-group">
+              <label>Dental Findings (Missing / Restorations)</label>
+              <input type="text" name="dentalMissing" class="form-input" placeholder="e.g. Tooth #31 absent with healed bone">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Clothing Recovered on Remains</label>
+            <input type="text" name="clothingFound" class="form-input" placeholder="e.g. Blue textile collar fragments, denim waistband">
+          </div>
+
+          <div class="form-group">
+            <label>Personal Property & Effects Recovered</label>
+            <input type="text" name="personalEffectsFound" class="form-input" placeholder="e.g. White metal signet ring with engraved initials">
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label>DNA Sample Processing Status</label>
+              <select name="dnaSampleStatus" class="form-select">
+                <option value="Profile Sequenced (STR 16-locus available)">Profile Sequenced (STR 16-locus available)</option>
+                <option value="Extracting">Extracting</option>
+                <option value="Pending Sample Collection">Pending Sample Collection</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Examining Forensic Pathologist</label>
+              <input type="text" name="pathologistName" class="form-input" value="Dr. K. S. Mehra, Senior Forensic Pathologist">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" onclick="closeModal('modalPM')">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Unidentified Body Record</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="modalSignOff">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3>Formal Disaster Victim Reconciliation Sign-Off</h3>
+        <button class="modal-close" onclick="closeModal('modalSignOff')">&times;</button>
+      </div>
+      <form id="formSignOff">
+        <div class="modal-body">
+          <div class="alert-box alert-success mb-3">
+            <strong>Interpol DVI Standard Reconciliation:</strong> You are certifying a conclusive forensic identity match between the selected Ante-Mortem and Post-Mortem records.
+          </div>
+
+          <div class="signoff-summary-grid mb-3">
+            <div class="signoff-box">
+              <span class="label">Identified Victim (AM):</span>
+              <strong id="signOffAMName">Amit Sharma</strong>
+              <div class="text-muted" id="signOffAMId">AM-2026-001</div>
+            </div>
+            <div class="signoff-box">
+              <span class="label">Recovered Remains (PM):</span>
+              <strong id="signOffPMId">PM-2026-081</strong>
+              <div class="text-muted" id="signOffPMLocation">Substation Floor B2</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Calculated Concordance Score</label>
+            <div class="score-display-box" id="signOffScoreBox">96% — HIGH CONFIDENCE IDENTIFICATION</div>
+          </div>
+
+          <div class="form-group">
+            <label>Lead Forensic Pathologist *</label>
+            <input type="text" id="signOffPathologist" class="form-input" required value="Dr. K. S. Mehra, Senior Forensic Pathologist (SFSL)">
+          </div>
+
+          <div class="form-group">
+            <label>Chief Forensic Odontologist *</label>
+            <input type="text" id="signOffOdontologist" class="form-input" required value="Dr. R. Alok, Chief Forensic Odontologist">
+          </div>
+
+          <div class="form-group">
+            <label>Official Reconciliation Board Findings & Notes</label>
+            <textarea id="signOffNotes" class="form-input form-textarea" rows="3">Reconciliation confirmed on conclusive dental concordance (gold crown #16), consistent appendectomy surgical scar, and matching personal monogrammed ring. DNA confirmation cross-referenced.</textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" onclick="closeModal('modalSignOff')">Cancel</button>
+          <button type="submit" class="btn btn-success">Issue & Certify DVI Dossier</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+[
+  {
+    "reconciliationId": "REC-DVI-092601",
+    "timestamp": "2026-09-27T09:30:00.000Z",
+    "amId": "AM-2026-001",
+    "victimName": "Amit Sharma",
+    "pmId": "PM-2026-081",
+    "recoveryNumber": "REC-081-METRO",
+    "recoveryLocation": "Substation Floor B2, adjacent to main transformer panel 4",
+    "matchScore": 96,
+    "confidenceTier": "HIGH CONFIDENCE IDENTIFICATION (Reconciliation Recommended)",
+    "primaryEvidentiaryBasis": [
+      "Conclusive Odontology Concordance: Identical dental signatures detected (#16, #31, #46, #47, gold crown). High scientific weight.",
+      "Primary Identifier Match: STR DNA profiles available from both parties for conclusive comparative genotyping."
+    ],
+    "secondaryEvidentiaryBasis": [
+      "Concordant Anatomical Marker: Matching surgical appendectomy scar in right lower quadrant (6.2cm).",
+      "Stature concordance: AM 174cm vs PM 173cm (within 1cm variance)."
+    ],
+    "auxiliaryEvidentiaryBasis": [
+      "Auxiliary Concordance: Textile & apparel remnants directly correspond (navy blue cotton polo, denim jeans).",
+      "Auxiliary Strong Match: Silver signet ring recovered from digit 5 with engraved monogram initials 'A.S.'."
+    ],
+    "forensicRationale": "Candidate comparison between Ante-Mortem profile Amit Sharma (AM-2026-001) and Unidentified Remains PM-2026-081 yields a calculated concordance index of 96%. Scientific identification is conclusively established by Primary DVI Identifiers: concordant dental restorative charting (gold crown on tooth #16, antemortem loss of #31 with healed ridge, occlusal composite restorations on #46 & #47). Biological sex, stature, and appendectomy surgical history show 100% concordance. Personal monogrammed signet ring ('A.S.') provides auxiliary corroboration.",
+    "signoff": {
+      "forensicPathologist": "Dr. K. S. Mehra, Senior Forensic Pathologist (SFSL)",
+      "forensicOdontologist": "Dr. R. Alok, Chief Forensic Odontologist",
+      "investigatingOfficer": "Inspector V. Saxena, Metropolitan Crime Investigation Branch"
+    },
+    "notes": "Positive identification confirmed under Interpol DVI Resolution guidelines. Mortal remains cleared for release to legal next of kin.",
+    "dossierNumber": "DVI-DOSSIER-REC-DVI-092601"
+  }
+]

@@ -1,0 +1,11 @@
+{
+  "incidentId": "DIS-2026-METRO",
+  "operationName": "Operation Metro-Trident",
+  "incidentType": "Industrial Flash Explosion & Tunnel Collapse",
+  "location": "Metro Transit Line 3, Substation B & Tunnel Works",
+  "dateOccurred": "2026-09-26T04:15:00.000Z",
+  "investigatingAgency": "State Forensic Science Laboratory & Metropolitan Disaster Investigation Unit",
+  "dviCommander": "Dr. K. S. Mehra, Senior Forensic Pathologist",
+  "leadOdontologist": "Dr. R. Alok, Chief Forensic Odontologist",
+  "status": "Active Identification Phase"
+}
